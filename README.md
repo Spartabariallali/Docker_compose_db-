@@ -25,7 +25,7 @@ Docker looks for containers on the local host first and if they are not availabl
 
 ### Microservices excercise
 
-####1. create a docker-compose file (.yaml/yml)
+#### 1. create a docker-compose file (.yaml/yml)
 
 ```
 version: '3'
@@ -52,7 +52,7 @@ services:
  # db: {}
 ```
 
-####2. Running the docker compose file
+#### 2. Running the docker compose file
 ```
 docker-compose Build
 ```
