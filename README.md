@@ -27,6 +27,11 @@ Docker looks for containers on the local host first and if they are not availabl
 
 #### 1. create a docker-compose file (.yaml/yml)
 
+- Docker compose is a tool for defining and running multi-container docker applications. With compose, you use a yaml file to configure your application's services.  
+
+
+
+
 ```
 version: '3'
 
@@ -64,6 +69,7 @@ docker-compose up -d
 ```
 docker exec 291d63f4c29f sh
 ```
+
 
 ### What is Microservices?
 
