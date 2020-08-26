@@ -74,6 +74,21 @@ docker exec 291d63f4c29f sh
 - Organized around business capability’s
 - Owned by a small team
 
+### Advantages of Microservices
+
+- **Scalability**: Since the services are seperate, we can easily scale the most needed services when necessary as opposed to scaling the whole application, thus improving cost savings
+
+- **Faster Deplyoments**: Smaller codebases allows for quicker deployments and thus improving the efficiency of the CI/CD pipeline. Leading to greater customer satisfaction
+
+- **More technological flexibility**: Smaller services means that you can try out new tools on an individual service without it affecting the rest of the application, this means organisations can experiment between more efficient tools
+
+
+### Disadvantages of Microservices
+
+- **May not be benefifial for small businesses**: Microservices can be difficult to implement for smaller business who don't want to be bogged down in complex orchestration between all the services
+
+
+
 
 ### What is Monolithic Architecture?
 
