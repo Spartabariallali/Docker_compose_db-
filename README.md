@@ -79,3 +79,5 @@ docker exec 291d63f4c29f sh
 
 - Monolithic Architecture is a architecture, which contains all the services and components of an application as single package.
 - We can simplify this as "Way of maintaining all the services that are offered by an application in a single resource or as a single package".
+
+![monolothic-microservices](imagesmd/monolithic-vs-microservices.jpeg)
