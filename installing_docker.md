@@ -6,7 +6,7 @@
 
 - double-click ``Docker.dmg`` to open the installer, then drag the docker icon to the application folder.
 
-![docker_drag](imagesmd/dokcer-app-drag.jpeg)
+![docker_drag](imagesmd/docker-app-drag.jpeg)
 
 
 ### 2. Click on the Docker in in launch pad
