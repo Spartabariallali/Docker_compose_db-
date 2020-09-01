@@ -83,3 +83,19 @@ http://localhost:8080/
 9. To check whether jenkins is running:
 ```bash
 brew services list
+```
+
+
+## Docker plugins
+
+**List of plugins used:**
+```bash
+Docker Plugin
+CloudBees Docker Hub/Registry Notification
+CloudBees Docker Build and Publish
+Email Extension
+Github Plugin
+NodeJS Plugin
+Oracle Java SE Development Kit Installer Plugin
+Pipeline Plugin
+```
