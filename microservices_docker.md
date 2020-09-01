@@ -85,7 +85,6 @@ http://localhost:8080/
 brew services list
 ```
 
-
 ## Docker plugins
 
 **List of plugins used:**
@@ -99,3 +98,45 @@ NodeJS Plugin
 Oracle Java SE Development Kit Installer Plugin
 Pipeline Plugin
 ```
+
+## Setting CI build
+
+1. Create a freestyle job on Jenkins and call it `Docker_Pipeline_Integration_Test` with the following configurations:
+    - **General** -> `Discard Old Builds` -> `Max # of builds to keep` -> 3
+    - **Github Project URL** -> Insert URL for Github Repository
+    - **Source Code Management** -> `Git` ->  Insert `Repository URL` and `Credentials` (To learn how to add credentials click [here](https://sharadchhetri.com/how-to-setup-jenkins-credentials-for-git-repo-access/)) -> `Branches to build` -> `Branch Specifier` -> `*/dev*`
+    - **Build Triggers** -> `GitHub hook trigger for GITScm polling`
+    - **Build Environment** -> `Add Timestamps` -> `Provide Node & npm bin/folder to PATH` -> Choose default NodeJs Installation (go to step 3 if NodeJS plugin requires activation) -> npmrc file ` - use system default - ` - Cache location `Default`
+    - **Build** -> `Execute Shell` -> Go to Step 5
+    - **Post-build Actions** -> `Push Only if Build Succeeds` -> `Merge Results` -> `Branches` -> Branch to push: `master` -> Target remote name: `origin`
+    -  Click `Apply` and `Save`
+
+> **Note**: Webhooks only work with a public IP. You will need to forward your local port [http://localhost:8080/](http://localhost:8080/) to the Internet/public using an SSH server like [Serveo](https://medium.com/automationmaster/how-to-forward-my-local-port-to-public-using-serveo-4979f352a3bf), Ngrok or [SocketXP](https://www.socketxp.com/download).
+---
+> To set up Github Webhooks, Jenkins, and Ngrok for Local Development click [here](https://medium.com/@developerwakeling/setting-up-github-webhooks-jenkins-and-ngrok-for-local-development-f4b2c1ab5b6)
+---
+**Commands to forward local port to public IP with** `SocketXP`:
+```bash
+sudo su
+sudo curl -O https://portal.socketxp.com/download/darwin/socketxp && chmod 777 socketxp && sudo mv socketxp /usr/local/bin
+socketxp login "authentication_token_goes_here"
+socketxp connect http://localhost:8080
+Connected.
+Public URL -> https://naistangz-z012h3op.socketxp.com
+```
+---
+2. On Github, navigate to your [repository](https://github.com/naistangz/Docker_Jenkins_Pipeline/tree/development) -> Go to `Settings` -> `Webhooks` -> in Payload URL, enter Jenkins URL e.g:
+```bash
+http://naistangz-z012h3op.socketxp.com/github-webhook/
+```
+-> Enable `SSL verification` -> `Update webhook` -> `Redeliver`
+
+3. Go back to Jenkins and make sure `nodejs` plugin is installed
+4. To activate `nodejs` plugin, go to `Manage Jenkins` > `System Configuration` > `Global Tool Configuration` > `NodeJS` > `Add NodeJS` > Give it a name e.g. `Node` > Save and Apply
+5. Execute shell
+```bash
+npm install
+npm test
+```
+6. Once saved, make changes on your IDE on a new branch and push to Github -> Jenkins will listen to incoming `POST` requests to the Payload URL used on Github and automatically merge changes from the new branch to the master branch if the tests pass.
+7. Go to console output to check if the build was successful (indicated by the blue circle :large_blue_circle:)
